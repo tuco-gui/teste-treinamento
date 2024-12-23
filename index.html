@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Liderança Situacional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .correct-answer {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teste de Liderança Situacional</h1>
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Qual é o estilo indicado para liderados no nível M1?</p>
+            <label><input type="radio" name="q1" value="A"> A) Apoiador</label><br>
+            <label><input type="radio" name="q1" value="B"> B) Diretivo</label><br>
+            <label><input type="radio" name="q1" value="C"> C) Delegador</label><br>
+            <label><input type="radio" name="q1" value="D"> D) Orientador</label>
+        </div>
+        <div class="question">
+            <p>2. O que caracteriza um liderado no nível M3?</p>
+            <label><input type="radio" name="q2" value="A"> A) Alta competência e motivação constante</label><br>
+            <label><input type="radio" name="q2" value="B"> B) Baixa competência e baixa motivação</label><br>
+            <label><input type="radio" name="q2" value="C"> C) Alta competência, mas motivação ou confiança variável</label><br>
+            <label><input type="radio" name="q2" value="D"> D) Alguma experiência, mas insegurança persistente</label>
+        </div>
+        <div class="question">
+            <p>3. Quando evitar o estilo Delegador?</p>
+            <label><input type="radio" name="q3" value="A"> A) Quando a equipe é altamente qualificada</label><br>
+            <label><input type="radio" name="q3" value="B"> B) Quando a tarefa exige supervisão adicional</label><br>
+            <label><input type="radio" name="q3" value="C"> C) Em projetos de longo prazo</label><br>
+            <label><input type="radio" name="q3" value="D"> D) Quando os liderados precisam de autonomia</label>
+        </div>
+        <button type="button" onclick="calculateResults()">Ver Resultado</button>
+    </form>
+    <div id="result" class="result"></div>
+
+    <script>function calculateResults() {
+      const correctAnswers = {
+        q1: "B",
+        q2: "C",
+        q3: "B"
+      };
+      let score = 0;
+      const form = document.getElementById('quizForm');
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = ""; // Limpa resultados anteriores
+
+      for (const [key, value] of Object.entries(correctAnswers)) {
+        const userAnswer = form.elements[key].value;
+        if (userAnswer === value) {
+          score++;
+          resultDiv.innerHTML += `<p>Questão ${key[1]}: <span class="correct-answer">Correto!</span></p>`;
+        } else {
+          resultDiv.innerHTML += `<p>Questão ${key[1]}: <span class="wrong-answer">Errado!</span> A resposta correta é <b>${value}</b>.</p>`;
+        }
+      }
+      const totalQuestions = Object.keys(correctAnswers).length;
+      const percentage = Math.round((score / totalQuestions) * 100);
+      resultDiv.innerHTML += `<p>Você acertou ${score} de ${totalQuestions} (${percentage}%).</p>`;
+      resultDiv.innerHTML += `<p>${percentage >= 60 ? '<span class="correct-answer">Aprovado!</span>' : '<span class="wrong-answer">Reprovado.</span>'}</p>`;
+    }</script>
+</body>
+</html>
+
